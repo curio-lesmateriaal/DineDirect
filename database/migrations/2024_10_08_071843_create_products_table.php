@@ -19,8 +19,6 @@ return new class extends Migration
             $table->text('ingredients')->nullable();
             $table->decimal('price', 8, 2);
             $table->boolean('showOnMenu')->default(true);
-            $table->enum('type', ['food', 'drink']);
-
             $table->timestamps();
         });
     }
