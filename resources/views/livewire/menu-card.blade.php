@@ -46,8 +46,8 @@
                                     {{-- + and - buttons --}}
                                     <div class="flex items">
                                         <span  class="bg-gray-500 m-2 text-gray-200 px-4 py-2">{{$product->price}}</span>
-                                        <button wire:click="removeProduct" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l" >-</button>
-                                        <button wire:click="addProduct" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r">+</button>
+                                        <button wire:click="removeProduct( {{$product}} )" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l" >-</button>
+                                        <button wire:click="addProduct( {{$product}} )" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                     {{-- + and - buttons --}}
                                     <div class="flex items">
                                         <span class="bg-gray-500 m-2 text-gray-200 px-4 py-2">{{$product->price}}</span>
-                                        <button class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l" wire:click="decreaseQuantity({{$product->id}})">-</button>
-                                        <button class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r" wire:click="increaseQuantity({{$product->id}})">+</button>
+                                        <button wire:click="removeProduct( {{$product}} )" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l">-</button>
+                                        <button class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r" wire:click="addProduct( {{$product}} )">+</button>
                                     </div>
                                 </div>
                             </div>

@@ -9,11 +9,10 @@ class MenuCard extends Component
 {
     public $foodCategories;
     public $drinkCategories;
+
     public $order = [
-        ['name' => 'Kippensoep', 'id' => 4,'amount' => 3, 'price' => '2.50'],
-        ['name' => 'Tomatensoep', 'id' => 5,'amount' => 1, 'price' => '2.50'],
-        ['name' => 'Cola', 'id' => 6,'amount' => 2, 'price' => '1.50'],
-        ['name' => 'Fanta', 'id' => 7,'amount' => 1, 'price' => '1.50'],
+        // ['name' => 'Kippensoep', 'id' => 4,'amount' => 3, 'price' => '2.50'],
+
     ];
 
     public function mount() {
@@ -21,12 +20,19 @@ class MenuCard extends Component
        $this->drinkCategories = Category::where('type', 'drink')->get();
     }
 
-    public function removeProduct() {
-        dd('Removing product!');
+    public function removeProduct($product) {
+        dd($product);
     }
 
-    public function addProduct() {
-        dd('Adding product!');
+    public function addProduct($product) {
+        // check if product already exists in order
+        if(array_key_exists($product['id'], $this->order)) {
+            $this->order[$product['id']]['amount']++;
+        } else {
+            $product['amount'] = 1;
+            $this->order[$product['id']] = $product;
+        }
+
     }
 
     public function render()
