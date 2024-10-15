@@ -2,6 +2,16 @@
 
     <!-- Menu Section -->
     <section class="container mx-auto px-4 py-12">
+        @if (session()->has('message'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative my-2" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">{{ session('message') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 5.652a1 1 0 011.415 0l.707.707a1 1 0 010 1.415L11.415 12l5.045 5.045a1 1 0 01-1.415 1.415L10 13.415l-5.045 5.045a1 1 0 01-1.415-1.415L8.585 12 3.54 6.955a1 1 0 011.415-1.415L10 10.585l4.348-4.933z"/></svg>
+                </span>
+            </div>
+        @endif
+
 
         @if(!empty($order))
             <div class="order bg-white shadow-md rounded-lg p-6 my-4 max-w-lg mx-auto">
@@ -18,10 +28,12 @@
                         </li>
                     @endforeach
                 </ul>
-
+                <div>
+                    <p class="text-xl text-center font-bold mt-6">Totaal: €{{ $this->getOrderPrice() }}</p>
+                </div>
                 <!-- Add the "Bestelling Plaatsen" button -->
                 <div class="mt-6 text-center">
-                    <button class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                    <button wire:click="placeOrder" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
                         Bestelling Plaatsen
                     </button>
                 </div>
