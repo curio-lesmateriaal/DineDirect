@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <title>Menu Card</title>
     <style>
         /* Ensure the minus button doesn't decrease the count below 1 */
@@ -24,7 +23,9 @@
             <p class="text-gray-600">Order delicious food & drinks, and enjoy your meal!</p>
         </div>
     </header>
+
     @livewire('menu-card')
+
     <!-- Footer -->
     <footer class="bg-gray-800 py-6 mt-12">
         <div class="container mx-auto text-center text-gray-400">

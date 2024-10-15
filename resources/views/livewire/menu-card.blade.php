@@ -1,4 +1,5 @@
 <div>
+
     <!-- Menu Section -->
     <section class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -7,7 +8,25 @@
             <div>
                 <h2 class="text-3xl font-bold text-gray-800 mb-6">Drinks</h2>
                 <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
-
+                    @foreach($drinkCategories as $category)
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">{{$category->name}}</h3>
+                        @foreach($category->products as $product)
+                            <div class="flex justify-between items-center mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold">{{$product->name}}</h4>
+                                    <p class="text-gray-600">{{$product->description}}</p>
+                                </div>
+                                <div>
+                                    {{-- + and - buttons --}}
+                                    <div class="flex items">
+                                        <span  class="bg-gray-500 m-2 text-gray-200 px-4 py-2">{{$product->price}}</span>
+                                        <button wire:click="removeProduct" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l" >-</button>
+                                        <button wire:click="addProduct" class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
 
@@ -16,7 +35,25 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-6">Foods</h2>
                 <!-- Starters -->
                 <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
-
+                    @foreach($foodCategories as $category)
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">{{$category->name}}</h3>
+                        @foreach($category->products as $product)
+                            <div class="flex justify-between items-center mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold">{{$product->name}}</h4>
+                                    <p class="text-gray-600">{{$product->description}}</p>
+                                </div>
+                                <div>
+                                    {{-- + and - buttons --}}
+                                    <div class="flex items">
+                                        <span class="bg-gray-500 m-2 text-gray-200 px-4 py-2">{{$product->price}}</span>
+                                        <button class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-l" wire:click="decreaseQuantity({{$product->id}})">-</button>
+                                        <button class="bg-gray-500 m-2 text-gray-200 px-4 py-2 rounded-r" wire:click="increaseQuantity({{$product->id}})">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
