@@ -2,8 +2,34 @@
 
     <!-- Menu Section -->
     <section class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
+        @if(!empty($order))
+            <div class="order bg-white shadow-md rounded-lg p-6 my-4 max-w-lg mx-auto">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Uw Bestelling</h1>
+                <ul class="space-y-4">
+                    @foreach($order as $product)
+                        <li class="bg-gray-50 border rounded-lg p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-lg font-semibold text-gray-700">{{ $product['name'] }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-500">Aantal: <span class="font-bold">{{ $product['amount'] }}</span></p>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+
+                <!-- Add the "Bestelling Plaatsen" button -->
+                <div class="mt-6 text-center">
+                    <button class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                        Bestelling Plaatsen
+                    </button>
+                </div>
+            </div>
+        @endif
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <!-- Drinks Section -->
             <div>
                 <h2 class="text-3xl font-bold text-gray-800 mb-6">Drinks</h2>
