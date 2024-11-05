@@ -13,6 +13,16 @@ class OrderOverview extends Component
         $this->orders = Order::all();
     }
 
+    public function filter($type) {
+        $this->orders = Order::all()->map(function ($order) use ($type) {
+            $order->filtered_products = $order->products->filter(function ($product) use ($type) {
+                return $product->category->type === $type;
+            });
+            return $order;
+        });
+
+    }
+
     public function setAsReady($orderId) {
         $order = $this->orders->find($orderId);
         $order->status = 'served';

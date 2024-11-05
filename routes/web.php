@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,8 @@ Route::prefix('dashboard')
         ->middleware(['auth'])
         ->group(function() {
 
-            Route::get('/orders', function() {
-                return view('dashboard');
-            })->name('dashboard');
+            Route::get('/tables', [DashboardController::class, 'tables'])->name('tables');
+            Route::get('/orders', [DashboardController::class, 'orders'])->name('dashboard');
 
         });
 
