@@ -13,6 +13,13 @@ class OrderOverview extends Component
         $this->orders = Order::all();
     }
 
+    public function setAsReady($orderId) {
+        $order = $this->orders->find($orderId);
+        $order->status = 'served';
+        $order->save();
+        session()->flash('message', 'Order status updated successfully.');
+    }
+
     public function render()
     {
         return view('livewire.order-overview');

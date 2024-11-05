@@ -1,52 +1,24 @@
-<div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div class="mt-8 w-2/3 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <!-- Example Order -->
-    <div class="bg-yellow-300 p-5 rounded-lg shadow-lg transform rotate-2">
-        <h2 class="text-xl font-bold">Order #101</h2>
+    @foreach($orders as $order)
+    <div style="min-height: 300px"  class="@if($order->status == 'served') bg-green-300 @else bg-yellow-500 @endif p-5 rounded-lg shadow-lg transform rotate-2">
+        <i>Ingekomen op: {{Date('d-m-Y h:m', strtotime($order->created_at))}}</i>
+        <h2 class="text-xl font-bold">Order #{{ $order->id }}</h2>
         <ul class="mt-3 text-gray-700">
-            <li>2x Burger</li>
-            <li>1x Fries</li>
-            <li>1x Coke</li>
+            @foreach($order->products as $product)
+                <li>{{$product->pivot->quantity}}x {{$product->name}}</li>
+            @endforeach
         </ul>
-        <p class="mt-5 text-gray-800 text-sm">Table 4</p>
-    </div>
+        <p class="mt-5 font-bold uppercase text-gray-800 text-sm">Tafel {{$order->table_id}}</p>
+        @if($order->status == 'served')
+            <button class="absolute bottom-2 text-gray-800 text-2xl  text-white font-bold py-2 px-4 rounded"> ✅ Geserveerd</button>
 
-    <div class="bg-yellow-300 p-5 rounded-lg shadow-lg transform -rotate-2">
-        <h2 class="text-xl font-bold">Order #102</h2>
-        <ul class="mt-3 text-gray-700">
-            <li>1x Spaghetti</li>
-            <li>1x Garlic Bread</li>
-            <li>1x Lemonade</li>
-        </ul>
-        <p class="mt-5 text-gray-800 text-sm">Table 7</p>
-    </div>
+        @else
+            <button wire:click="setAsReady({{$order->id}})" class="bg-green-500 absolute bottom-2 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Klaar voor service</button>
 
-    <div class="bg-yellow-300 p-5 rounded-lg shadow-lg transform rotate-1">
-        <h2 class="text-xl font-bold">Order #103</h2>
-        <ul class="mt-3 text-gray-700">
-            <li>3x Tacos</li>
-            <li>1x Salsa</li>
-            <li>1x Iced Tea</li>
-        </ul>
-        <p class="mt-5 text-gray-800 text-sm">Table 12</p>
-    </div>
+        @endif
 
-    <div class="bg-yellow-300 p-5 rounded-lg shadow-lg transform rotate-1">
-        <h2 class="text-xl font-bold">Order #103</h2>
-        <ul class="mt-3 text-gray-700">
-            <li>3x Tacos</li>
-            <li>1x Salsa</li>
-            <li>1x Iced Tea</li>
-        </ul>
-        <p class="mt-5 text-gray-800 text-sm">Table 12</p>
     </div>
+    @endforeach
 
-    <div class="bg-yellow-300 p-5 rounded-lg shadow-lg transform rotate-1">
-        <h2 class="text-xl font-bold">Order #103</h2>
-        <ul class="mt-3 text-gray-700">
-            <li>3x Tacos</li>
-            <li>1x Salsa</li>
-            <li>1x Iced Tea</li>
-        </ul>
-        <p class="mt-5 text-gray-800 text-sm">Table 12</p>
-    </div>
 </div>
