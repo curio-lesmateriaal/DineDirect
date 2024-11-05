@@ -10,6 +10,12 @@ Route::get('/table/{table_code}', function() {
     return view('menu');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::prefix('dashboard')
+        ->middleware(['auth'])
+        ->group(function() {
+            Route::get('/orders', function() {
+                return view('dashboard');
+            });
+        });
+
+
